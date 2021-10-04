@@ -42,6 +42,18 @@ public class Recette implements Serializable {
 
 
     //Methodes persos
+    private static double arrondir(double chiffre, int nbChiffreApresVirgule){
+        double chiffreArrond;
+        String nbC = "1";
+        for (int i = 0; i < nbChiffreApresVirgule; i++) {
+            nbC += "0";
+        }
+        Integer arrond = Integer.parseInt(nbC);
+        chiffreArrond = (double)Math.round(chiffre*arrond) / arrond;
+        return chiffreArrond;
+    }
+
+
     public Double calcMalt() {
         //(Volume de bière désiré en L * degré d’alcool recherché ) / 20 = Malt en kg
         return ( volumeBiere * alcoolDegre ) / 20;
@@ -75,15 +87,15 @@ public class Recette implements Serializable {
 
     public Double calcMcu() {
         //MCU = (4,23 * (Moyenne EBC des grains * poidsEnKg des grains)) / le volume de bière désiré en L
-        return (4.23 * (moyenneEBC * calcMalt())) / volumeBiere;
+        return arrondir((4.23 * (moyenneEBC * calcMalt()) / volumeBiere ),3);
     }
     public Double calcSrm() {
         //SRM = 0,508 * EBC
-        return calcEbcFromMcu() * 0.508;
+        return arrondir(calcEbcFromMcu() * 0.508,3);
     }
     public Double calcEbcFromSrm() {
         //EBC = 1,97 * SRM
-        return calcSrm() * 1.97;
+        return arrondir(calcSrm() * 1.97, 3);
     }
     public Double calcEbcFromMcu() {
         //EBC = 2,9396 * (MCU^0,6859)
