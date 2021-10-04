@@ -50,7 +50,6 @@ public class Menu2Activity extends AppCompatActivity {
         init();
         calculerIngredients();
         checkSerialize();
-        srmToRGB(recette.calcSrm());
 
     }
 
