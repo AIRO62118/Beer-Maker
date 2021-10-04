@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class Recette {
+import java.io.Serializable;
+
+public class Recette implements Serializable {
 
     //Attributs persos
     Double volumeBiere;
@@ -67,6 +69,9 @@ public class Recette {
         //Volume de bière désiré en L / 2 = quantité de levure en g
         return volumeBiere / 2;
     }
+
+
+
 
     public Double calcMcu() {
         //MCU = (4,23 * (Moyenne EBC des grains * poidsEnKg des grains)) / le volume de bière désiré en L
