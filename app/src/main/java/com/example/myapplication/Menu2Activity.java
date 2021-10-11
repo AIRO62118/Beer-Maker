@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,19 +14,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 public class Menu2Activity extends AppCompatActivity {
 
     //Attributs
-    Recette recette;
+    private Recette recette;
+    private AccesLocal accesLocal;
+    private RecyclerView listeBdd;
 
     EditText input1;
     EditText input2;
     EditText input3;
 
     Button boutonCalculer;
+    Button boutonEnregistrer;
 
     LinearLayout layoutReponse;
 
@@ -50,6 +56,7 @@ public class Menu2Activity extends AppCompatActivity {
         init();
         calculerIngredients();
         checkSerialize();
+        enregistrer();
 
     }
 
@@ -60,6 +67,7 @@ public class Menu2Activity extends AppCompatActivity {
         input3 = findViewById(R.id.input3);
 
         boutonCalculer = findViewById(R.id.boutonCalculer);
+        boutonEnregistrer = findViewById(R.id.boutonEnregistrer);
 
         layoutReponse = findViewById(R.id.layoutReponse);
 
@@ -76,6 +84,9 @@ public class Menu2Activity extends AppCompatActivity {
         textColor = findViewById(R.id.textColor);
 
         layoutReponse.setVisibility(View.INVISIBLE);
+
+        accesLocal = new AccesLocal(this);
+        listeBdd = findViewById(R.id.listeRecette);
 
     }
 
@@ -97,7 +108,6 @@ public class Menu2Activity extends AppCompatActivity {
         Serializer.serialize(serializable, recette, Menu2Activity.this);
 
     }
-
     private void afficherIngredient(){
         reponse1.setText("Quantité de Malt: "+recette.calcMalt()+" kg");
         reponse2.setText("Quantité Eau Brassage:" +recette.calcEauB()+" L");
@@ -113,8 +123,6 @@ public class Menu2Activity extends AppCompatActivity {
         textColor.setText(srmToRGB(recette.calcSrm()));
         layoutReponse.setVisibility(View.VISIBLE);
     }
-
-
     private void calculerIngredients(){
         boutonCalculer.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -123,6 +131,18 @@ public class Menu2Activity extends AppCompatActivity {
             }
         });
     }
+
+    private void enregistrer(){
+        boutonEnregistrer.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                accesLocal.ajout(recette.getVolumeBiere(), recette.getAlcoolDegre(), recette.getMoyenneEBC());
+                Toast.makeText(Menu2Activity.this, "Saisie Enregistrée", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
 
     private String srmToRGB(double srm) {
         // Returns an RGB value based on SRM
@@ -194,7 +214,6 @@ public class Menu2Activity extends AppCompatActivity {
     private void recupSerialize(Context contexte){
         recette = (Recette) Serializer.deserialize(serializable, contexte);
     }
-
     private void checkSerialize(){
         try{
             recupSerialize(this);

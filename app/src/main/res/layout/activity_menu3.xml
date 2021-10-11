@@ -29,4 +29,9 @@
             android:text="@string/Menu3"
             android:textSize="30sp" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listeRecette"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -58,17 +58,14 @@ public class Recette implements Serializable {
         //(Volume de bière désiré en L * degré d’alcool recherché ) / 20 = Malt en kg
         return arrondir((volumeBiere * alcoolDegre)  / 20,2);
     }
-
     public Double calcEauB() {
         //Quantité de malt en kg * 2,8 = Quantité d’eau de brassage en L
         return arrondir(calcMalt() * 2.8,2);
     }
-
     public Double calcEauR() {
         //(Volume de bière désiré en L *1,25) - (Eau de brassage en L *0,7 ) = Eau de rinçage en L
         return arrondir((volumeBiere * 1.25) - ( calcEauB() * 0.7 ), 2);
     }
-
     public Double calcHouAm() {
         //Houblon amérisant = Volume de bière à houblonner en L * 3g
         return arrondir(volumeBiere * 3,2);
@@ -81,9 +78,6 @@ public class Recette implements Serializable {
         //Volume de bière désiré en L / 2 = quantité de levure en g
         return arrondir(volumeBiere / 2,2);
     }
-
-
-
 
     public Double calcMcu() {
         //MCU = (4,23 * (Moyenne EBC des grains * poidsEnKg des grains)) / le volume de bière désiré en L
