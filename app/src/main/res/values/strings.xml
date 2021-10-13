@@ -3,4 +3,6 @@
     <string name="Menu1">Etape de Fabrication</string>
     <string name="Menu2">Outils de Fabrication</string>
     <string name="Menu3">Vos recettes</string>
+
+    <string name="nbrRecette">Vous avez %d recettes enregistrés</string>
 </resources>
