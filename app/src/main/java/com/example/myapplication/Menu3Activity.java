@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.RecyclerView.MyAdapter;
@@ -38,6 +40,9 @@ public class Menu3Activity extends AppCompatActivity {
         accesLocal = new AccesLocal(this);
 
         nbrRecette = findViewById(R.id.nbrRecette);
+
+
+
     }
 
 
@@ -47,4 +52,9 @@ public class Menu3Activity extends AppCompatActivity {
         Log.d("MonLog", "OnResume Start");
         super.onResume();
     }
+
+
+
+
+
 }
